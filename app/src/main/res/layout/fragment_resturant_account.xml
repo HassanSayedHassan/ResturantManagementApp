@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC">
+
+    <RelativeLayout
+        android:id="@+id/layout_one_history"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FAFAFA">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Account"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_history"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCC"
+        android:layout_below="@id/layout_one_history"></View>
+
+    <ImageView
+        android:id="@+id/select_language"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/view_history"
+        android:src="@drawable/ic_change_language"/>
+
+    <ImageView
+        android:id="@+id/iv_conversation"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:layout_below="@id/view_history"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_support"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/iv_error_icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_error_image"/>
+
+    <Button
+        android:id="@+id/btn_login_signup"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_error_icon"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:textColor="#FFF"
+        android:textAllCaps="false"
+        android:background="@drawable/round_back_red"
+        android:text="Login/Signup"/>
+
+</RelativeLayout>
