@@ -73,7 +73,6 @@
         android:id="@+id/rv_res_home"
         android:layout_below="@id/view_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F0F0F5"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

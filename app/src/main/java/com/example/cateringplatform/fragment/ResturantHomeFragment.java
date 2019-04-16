@@ -12,11 +12,18 @@ import android.view.ViewGroup;
 
 import com.example.cateringplatform.R;
 import com.example.cateringplatform.adapters.HomeAdapter;
+import com.example.cateringplatform.api.ApiServices;
+import com.example.cateringplatform.apiclient.APIClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResturantHomeFragment extends Fragment {
 
     private RecyclerView homeRecycler;
     private HomeAdapter homeAdapter;
+    private ApiServices apiServices;
 
     @Nullable
     @Override
@@ -27,8 +34,23 @@ public class ResturantHomeFragment extends Fragment {
         homeRecycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         homeRecycler.setHasFixedSize(true);
 
-        homeAdapter = new HomeAdapter();
-        homeRecycler.setAdapter(homeAdapter);
+        apiServices = APIClient.getRetrofit().create(ApiServices.class);
+        Call<String> call = apiServices.findResturantAPI();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                homeAdapter = new HomeAdapter();
+                homeRecycler.setAdapter(homeAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
 
         return view;
     }

@@ -10,9 +10,10 @@
         android:id="@+id/tv_available_on_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="5dp"
+        android:padding="8dp"
+        android:layout_marginBottom="10dp"
         android:text="Available on this date"
+        android:background="#F0F0F5"
         android:textColor="#000"/>
 
     <android.support.v7.widget.RecyclerView

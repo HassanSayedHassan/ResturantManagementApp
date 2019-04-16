@@ -13,7 +13,7 @@ public class AvailableResturantAdapter extends RecyclerView.Adapter<AvailableRes
     @NonNull
     @Override
     public AvailResHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_available_resturant,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_available_resturant,viewGroup,false);
         return new AvailResHolder(view);
     }
 
