@@ -16,7 +16,7 @@ object WebService {
 
         apiServices.findResturantAPI().enqueue(object : Callback<FindResturantModel>{
             override fun onFailure(call: Call<FindResturantModel>, t: Throwable) {
-                Log.d("findResturantResponse",t.localizedMessage);
+                Log.d("findResturantResponse",""+t.localizedMessage);
                 callback(null, ON_FAILURE_MESSAGE);
             }
 

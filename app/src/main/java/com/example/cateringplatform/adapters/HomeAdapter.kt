@@ -3,16 +3,17 @@ package com.example.cateringplatform.adapters
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.cateringplatform.R
+import com.example.cateringplatform.models.FindResturantModel
 
-class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(val context: Context?,val findResturantModel: FindResturantModel? ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val context: Context? = null
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
 
         if (i == VIEW_TYPE_FOOD_TYPE) {
@@ -33,7 +34,6 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val itemType = getItemViewType(i)
 
         if (itemType == VIEW_TYPE_FOOD_TYPE) {
-
             val foodTypeHolder = viewHolder as FoodTypeHolder
             val foodTypeAdapter = FoodTypeAdapter()
             foodTypeHolder.foodTypeRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -41,13 +41,14 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         } else if (itemType == VIEW_TYPE_FEATURE_RESTURANT) {
 
             val featureResturantHolder = viewHolder as FeatureResturantHolder
-            val featuredResturantAdapter = FeaturedResturantAdapter()
+            val featuredResturantAdapter = FeaturedResturantAdapter(context,findResturantModel)
             featureResturantHolder.featureResturantRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             featureResturantHolder.featureResturantRecycler.adapter = featuredResturantAdapter
+            Log.d("1111",""+findResturantModel?.response?.featured_restaurant?.get(i)?.restaurant_name)
         } else {
 
             val availableResturantHolder = viewHolder as AvailableResturantHolder
-            val availableResturantAdapter = AvailableResturantAdapter()
+            val availableResturantAdapter = AvailableResturantAdapter(context, findResturantModel)
             availableResturantHolder.availableResturantRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             availableResturantHolder.availableResturantRecycler.adapter = availableResturantAdapter
         }
@@ -78,10 +79,12 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class FeatureResturantHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+         val featureTextView : TextView
          val featureResturantRecycler: RecyclerView
 
         init {
             featureResturantRecycler = itemView.findViewById(R.id.rv_featured_resturant)
+            featureTextView = itemView.findViewById(R.id.tv_featured)
         }
     }
 
