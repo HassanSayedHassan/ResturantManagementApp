@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.cateringplatform.R
+import com.example.cateringplatform.Utills.hideProgressBar
+import com.example.cateringplatform.Utills.showToast
 import com.example.cateringplatform.models.FindResturantModel
+import com.example.cateringplatform.models.GetCuisineModel
+import com.example.cateringplatform.webservice.WebService
 
-class HomeAdapter(val context: Context?,val findResturantModel: FindResturantModel? ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(val context: Context?, val findResturantModel: FindResturantModel?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
 
@@ -23,7 +27,6 @@ class HomeAdapter(val context: Context?,val findResturantModel: FindResturantMod
             val featureResturant = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout_feature_resturant, viewGroup, false)
             return FeatureResturantHolder(featureResturant)
         } else {
-
             val availableResturant = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout_available_resturant, viewGroup, false)
             return AvailableResturantHolder(availableResturant)
         }
@@ -35,16 +38,37 @@ class HomeAdapter(val context: Context?,val findResturantModel: FindResturantMod
 
         if (itemType == VIEW_TYPE_FOOD_TYPE) {
             val foodTypeHolder = viewHolder as FoodTypeHolder
-            val foodTypeAdapter = FoodTypeAdapter()
             foodTypeHolder.foodTypeRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            foodTypeHolder.foodTypeRecycler.adapter = foodTypeAdapter
+
+
+            WebService.CallGetCuisineAPI { responseObj, error ->
+
+                if (error == null) {
+
+                    hideProgressBar()
+
+                    val getCuisineModel: GetCuisineModel? = responseObj
+
+                    val foodTypeAdapter = FoodTypeAdapter(context, getCuisineModel)
+                    foodTypeHolder.foodTypeRecycler.adapter = foodTypeAdapter
+
+                    Log.d("onResponseCuisine", "" + responseObj)
+                    Log.i("1555",""+getCuisineModel?.response?.cuisine_list?.get(i)?.cuisine_name)
+
+                } else {
+                    hideProgressBar()
+                    showToast(context!!, "" + error)
+                    Log.d("onErrorCuisine", "" + responseObj)
+
+                }
+            }
         } else if (itemType == VIEW_TYPE_FEATURE_RESTURANT) {
 
             val featureResturantHolder = viewHolder as FeatureResturantHolder
-            val featuredResturantAdapter = FeaturedResturantAdapter(context,findResturantModel)
+            val featuredResturantAdapter = FeaturedResturantAdapter(context, findResturantModel)
             featureResturantHolder.featureResturantRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             featureResturantHolder.featureResturantRecycler.adapter = featuredResturantAdapter
-            Log.d("1111",""+findResturantModel?.response?.featured_restaurant?.get(i)?.restaurant_name)
+            Log.d("1111", "" + findResturantModel?.response?.featured_restaurant?.get(i)?.restaurant_name)
         } else {
 
             val availableResturantHolder = viewHolder as AvailableResturantHolder
@@ -71,7 +95,7 @@ class HomeAdapter(val context: Context?,val findResturantModel: FindResturantMod
 
 
     inner class FoodTypeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-         val foodTypeRecycler: RecyclerView
+        val foodTypeRecycler: RecyclerView
 
         init {
             foodTypeRecycler = itemView.findViewById(R.id.rv_food_type)
@@ -79,8 +103,8 @@ class HomeAdapter(val context: Context?,val findResturantModel: FindResturantMod
     }
 
     inner class FeatureResturantHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-         val featureTextView : TextView
-         val featureResturantRecycler: RecyclerView
+        val featureTextView: TextView
+        val featureResturantRecycler: RecyclerView
 
         init {
             featureResturantRecycler = itemView.findViewById(R.id.rv_featured_resturant)

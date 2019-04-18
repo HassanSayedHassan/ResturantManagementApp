@@ -3,6 +3,7 @@ package com.example.cateringplatform.webservice
 import android.util.Log
 import com.example.cateringplatform.APIConfig.apiServices
 import com.example.cateringplatform.models.FindResturantModel
+import com.example.cateringplatform.models.GetCuisineModel
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,5 +35,25 @@ object WebService {
         })
 
 
+    }
+
+    fun CallGetCuisineAPI(getCuisineCallback: (GetCuisineModel?,String?)->Unit){
+
+        apiServices.getCuisinesAPI().enqueue(object : Callback<GetCuisineModel>{
+            override fun onFailure(call: Call<GetCuisineModel>, t: Throwable) {
+                Log.d("getCuisineResponse",""+t.localizedMessage);
+                getCuisineCallback(null, ON_FAILURE_MESSAGE);            }
+
+            override fun onResponse(call: Call<GetCuisineModel>, response: Response<GetCuisineModel>) {
+                Log.d("getCuisineResponse",Gson().toJson(response.body()))
+                Log.d("getCuisineResponse",response.code().toString())
+
+
+                if (response.isSuccessful){
+                    getCuisineCallback(response.body(), null)
+                } else{
+                    getCuisineCallback(null, ON_FAILURE_MESSAGE)
+                }            }
+        })
     }
 }

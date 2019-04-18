@@ -16,6 +16,7 @@ import com.example.cateringplatform.Utills.showToast
 import com.example.cateringplatform.adapters.HomeAdapter
 import com.example.cateringplatform.models.FeaturedRestaurant
 import com.example.cateringplatform.models.FindResturantModel
+import com.example.cateringplatform.models.GetCuisineModel
 import com.example.cateringplatform.webservice.WebService
 
 
@@ -50,7 +51,6 @@ class ResturantHomeFragment : Fragment() {
                 //TODO the response success code here
 
                 val findResturantModel: FindResturantModel? = responseObj
-
                 homeAdapter = HomeAdapter(context, findResturantModel)
                 homeRecycler!!.adapter = homeAdapter
 
@@ -60,7 +60,20 @@ class ResturantHomeFragment : Fragment() {
                 showToast(context!!, "" + error)
                 Log.d("onError", "" + responseObj)
 
-            }
+        }
         }
     }
+
+//    fun getCuisineAPI(){
+//        WebService.CallGetCuisineAPI { responseObj, error ->
+//
+//            if (error==null){
+//
+//                hideProgressBar()
+//
+//                val getCuisineModel:GetCuisineModel? = responseObj
+//                homeAdapter = HomeAdapter(context,)
+//            }
+//        }
+//    }
 }
