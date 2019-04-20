@@ -2,6 +2,7 @@ package com.example.cateringplatform.adapters
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -21,6 +22,7 @@ import com.example.cateringplatform.BASE_URL_IMAGE
 import com.example.cateringplatform.R
 import com.example.cateringplatform.Utills.hideProgressBar
 import com.example.cateringplatform.Utills.showProgressBar
+import com.example.cateringplatform.activity.DetailsActivity
 import com.example.cateringplatform.models.FindResturantModel
 import kotlinx.android.synthetic.main.item_available_resturant.view.*
 

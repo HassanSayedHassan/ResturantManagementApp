@@ -63,17 +63,4 @@ class ResturantHomeFragment : Fragment() {
         }
         }
     }
-
-//    fun getCuisineAPI(){
-//        WebService.CallGetCuisineAPI { responseObj, error ->
-//
-//            if (error==null){
-//
-//                hideProgressBar()
-//
-//                val getCuisineModel:GetCuisineModel? = responseObj
-//                homeAdapter = HomeAdapter(context,)
-//            }
-//        }
-//    }
 }

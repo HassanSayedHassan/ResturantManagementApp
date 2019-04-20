@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ResturantName"></activity>
         <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.DetailsActivity"></activity>
         <activity android:name=".activity.SplashScreenActivity">
 
             <intent-filter>

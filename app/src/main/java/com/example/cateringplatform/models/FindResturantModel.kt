@@ -1,5 +1,7 @@
 package com.example.cateringplatform.models
 
+import java.io.Serializable
+
 data class FindResturantModel(
     val meta: Meta,
     val response: Response
@@ -77,7 +79,7 @@ data class OpenRestaurant(
     val vat: Int,
     val vat_registration_number: String,
     val zip_code: String
-)
+):Serializable
 
 data class Location(
     val city_arabic_name: String,
@@ -86,7 +88,7 @@ data class Location(
     val district_list: List<District>,
     val location_for: Int,
     val location_type: Int
-)
+):Serializable
 
 data class District(
     val address: String,
@@ -94,7 +96,7 @@ data class District(
     val district_arabic_name: String,
     val district_id: Int,
     val district_name: String
-)
+):Serializable
 
 data class FoodCategory(
     val category_arabic_name: String,
@@ -106,7 +108,7 @@ data class FoodCategory(
     val status: Int,
     val total_order: Int,
     val updated_at: String
-)
+):Serializable
 
 data class FeaturedRestaurant(
     val accept_card: Int,
@@ -168,7 +170,7 @@ data class FeaturedRestaurant(
     val vat: Int,
     val vat_registration_number: String,
     val zip_code: String
-)
+):Serializable
 
 data class RestaurantReview(
     val comment: Any,
@@ -184,4 +186,4 @@ data class RestaurantReview(
     val status: Int,
     val updated_at: String,
     val user_id: Int
-)
+):Serializable
