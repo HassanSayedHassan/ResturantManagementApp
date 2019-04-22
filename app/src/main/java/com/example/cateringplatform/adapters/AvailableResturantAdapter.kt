@@ -1,12 +1,10 @@
 package com.example.cateringplatform.adapters
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +12,16 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.cateringplatform.BASE_URL_IMAGE
-
 import com.example.cateringplatform.R
-import com.example.cateringplatform.Utills.hideProgressBar
-import com.example.cateringplatform.Utills.showProgressBar
-import com.example.cateringplatform.activity.DetailsActivity
+import com.example.cateringplatform.activity.DetailsOpenActivity
 import com.example.cateringplatform.models.FindResturantModel
 import kotlinx.android.synthetic.main.item_available_resturant.view.*
 
 class AvailableResturantAdapter(val context: Context?, val findResturantModel: FindResturantModel?) : RecyclerView.Adapter<AvailableResturantAdapter.AvailResHolder>() {
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): AvailResHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_available_resturant, viewGroup, false)
         return AvailResHolder(view)
@@ -43,6 +38,17 @@ class AvailableResturantAdapter(val context: Context?, val findResturantModel: F
 
         Glide.with(context!!)
                 .load(imageUrl)
+                .listener(object :RequestListener<Drawable>{
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        availResHolder.itemView.iv_open_resturant_logo.setImageResource(R.drawable.ic_error_image)
+                        return true
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
+
+                })
                 .into(availResHolder.itemView.iv_open_resturant_logo)
 
 
@@ -62,6 +68,13 @@ class AvailableResturantAdapter(val context: Context?, val findResturantModel: F
 
             availResHolder.itemView.iv_card_delivery.visibility = View.GONE
         }
+
+        availResHolder.itemView.setOnClickListener(View.OnClickListener {
+
+            var intent = Intent(context,DetailsOpenActivity::class.java)
+            intent.putExtra("OpenResturant",findResturantModel?.response?.open_restaurant?.get(i))
+            context.startActivity(intent)
+        })
     }
 
     override fun getItemCount(): Int {

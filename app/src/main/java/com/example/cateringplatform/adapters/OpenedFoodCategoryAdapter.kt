@@ -12,6 +12,7 @@ import com.example.cateringplatform.models.OpenRestaurant
 import kotlinx.android.synthetic.main.item_open_food_category.view.*
 
 class OpenedFoodCategoryAdapter(val context: Context,val foodCategoryList: List<FoodCategory>): RecyclerView.Adapter<OpenedFoodCategoryAdapter.OpenFoodCatHolder>() {
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OpenFoodCatHolder {
 
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_open_food_category,p0,false)

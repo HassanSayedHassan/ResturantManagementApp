@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.cateringplatform.R
+import com.example.cateringplatform.activity.DetailsActivity
 import com.example.cateringplatform.models.FoodCategory
+import com.example.cateringplatform.models.OpenRestaurant
 import kotlinx.android.synthetic.main.item_featured_food_category.view.*
 
-class FeaturedFoodCategoryAdapter(val context: Context,val foodCategoryList: List<FoodCategory> ): RecyclerView.Adapter<FeaturedFoodCategoryAdapter.FeaturedFoodCatHolder>() {
+class FeaturedFoodCategoryAdapter(val context: Context,val foodCategoryList: List<FoodCategory>): RecyclerView.Adapter<FeaturedFoodCategoryAdapter.FeaturedFoodCatHolder>() {
 
     private var rowIndex:Int = -1
 
@@ -22,7 +24,9 @@ class FeaturedFoodCategoryAdapter(val context: Context,val foodCategoryList: Lis
     }
 
     override fun getItemCount(): Int {
+
         return foodCategoryList.size
+
     }
 
     override fun onBindViewHolder(p0: FeaturedFoodCatHolder, p1: Int) {

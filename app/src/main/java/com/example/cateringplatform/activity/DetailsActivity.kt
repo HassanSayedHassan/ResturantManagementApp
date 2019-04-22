@@ -1,16 +1,24 @@
 package com.example.cateringplatform.activity
 
+import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.cateringplatform.BASE_URL_IMAGE
 import com.example.cateringplatform.R
 import com.example.cateringplatform.adapters.FeaturedFoodCategoryAdapter
+import com.example.cateringplatform.adapters.FeaturedResturantAdapter
 import com.example.cateringplatform.adapters.OpenedFoodCategoryAdapter
 import com.example.cateringplatform.models.FeaturedRestaurant
+import com.example.cateringplatform.models.OpenRestaurant
 import kotlinx.android.synthetic.main.activity_details_resturant.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -27,42 +35,23 @@ class DetailsActivity : AppCompatActivity() {
         rv_details.layoutManager= LinearLayoutManager(this,LinearLayout.VERTICAL,false)
         rv_details.setHasFixedSize(true)
 
-        setValue()
-    }
+        tv_view_info.setOnClickListener(View.OnClickListener {
 
-//    private fun setValueforOpen() {
-//        objOpenResturant = intent.getSerializableExtra("OpenResturant") as OpenRestaurant
-//
-//        tv_res_name_details.text = objOpenResturant.restaurant_name
-//
-//        if (objOpenResturant.accept_cash_delivery == 1 && objOpenResturant.accept_card == 1) {
-//            tv_payment_option.text = "Bank transfer, Card"
-//        } else if (objOpenResturant.accept_cash_delivery == 1 && objOpenResturant.accept_card == 0) {
-//            tv_payment_option.text = "Bank transfer"
-//        } else if (objOpenResturant.accept_cash_delivery == 0 && objOpenResturant.accept_card == 1) {
-//            tv_payment_option.text = "Card"
-//        } else {
-//            tv_payment_option.visibility = View.GONE
-//        }
-//
-//
-//        tv_res_min_order_price.text = "Min: " + objOpenResturant.minimum_order_price + " SAR"
-//        tv_delivery_charge.text = "Delivery: " + objOpenResturant.delivery_charge + " SAR"
-//
-//        var imageUrl2: String = BASE_URL_IMAGE + "/" + objOpenResturant.restaurant_url + "/images/" + objOpenResturant.restaurant_logo
-//
-//        Glide.with(applicationContext)
-//                .load(imageUrl2)
-//                .into(iv_details_res_logo)
-//
-//        var minOrderNoticeOpenRes: Double = objOpenResturant.minimum_order_notice.toDouble()
-//
-//        var minOrderDaysOpenRes: Int = minOrderNoticeOpenRes.toInt() / 24
-//
-//        var minOrderHoursOpenRes: Int = minOrderNoticeOpenRes.toInt() % 24
-//
-//        validateOrderNotice(minOrderDaysOpenRes, minOrderHoursOpenRes)
-//    }
+            intent = Intent(applicationContext,ViewInfoActivity::class.java)
+            intent.putExtra("Name",objFeaturedResturant.restaurant_name)
+            intent.putExtra("Status",objFeaturedResturant.status)
+            intent.putExtra("StartTime",objFeaturedResturant.delivery_start_time)
+            intent.putExtra("EndTime",objFeaturedResturant.delivery_end_time)
+            intent.putExtra("MinimumOrder",objFeaturedResturant.minimum_order_price)
+            intent.putExtra("DeliveryCharge",objFeaturedResturant.delivery_charge)
+            intent.putExtra("CardDelivery",objFeaturedResturant.accept_card)
+            intent.putExtra("CashDelivery",objFeaturedResturant.accept_cash_delivery)
+
+            startActivity(intent)
+        })
+
+       setValue()
+    }
 
     private fun setValue() {
         objFeaturedResturant = intent.getSerializableExtra("Featured") as FeaturedRestaurant
@@ -86,6 +75,16 @@ class DetailsActivity : AppCompatActivity() {
 
         Glide.with(applicationContext)
                 .load(imageUrl)
+                .listener(object :RequestListener<Drawable>{
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        iv_details_res_logo.setImageResource(R.drawable.ic_error_image)
+                        return true
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
+                })
                 .into(iv_details_res_logo)
 
         var minOrderNotice: Double = objFeaturedResturant.minimum_order_notice.toDouble()
