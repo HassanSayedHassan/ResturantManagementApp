@@ -140,4 +140,12 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rl_type"></android.support.v7.widget.RecyclerView>
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_back_details"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_round_cross" />
 </RelativeLayout>

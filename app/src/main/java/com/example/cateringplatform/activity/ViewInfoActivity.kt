@@ -25,6 +25,7 @@ class ViewInfoActivity : AppCompatActivity(){
         var deliVharge:Int = intent.getIntExtra("DeliveryCharge",-1)
         var cardDelivery:Int = intent.getIntExtra("CardDelivery",-1)
         var cashDelivery:Int = intent.getIntExtra("CashDelivery",-1)
+        var cuisines:String = intent.getStringExtra("Cuisines")
 
         if (status==1){
 
@@ -49,6 +50,7 @@ class ViewInfoActivity : AppCompatActivity(){
 
 
         tv_resturant_name_info.text=name
+        tv_cuisines_info.text=cuisines
 
     }
 }

@@ -41,7 +41,7 @@ class FeaturedResturantAdapter(val context: Context?, val findResturantModel: Fi
                 .load(imageUrl)
                 .listener(object :RequestListener<Drawable>{
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        featuredHolder.itemView.iv_feat_food.setImageResource(R.drawable.ic_error_image)
+                        featuredHolder.itemView.iv_feat_food.setImageResource(R.drawable.app_icon)
                         return true
                     }
 

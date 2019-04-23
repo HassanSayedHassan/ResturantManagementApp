@@ -29,28 +29,32 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_resturant)
 
-        rv_type.layoutManager= LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
+        rv_type.layoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
         rv_type.setHasFixedSize(true)
 
-        rv_details.layoutManager= LinearLayoutManager(this,LinearLayout.VERTICAL,false)
+        rv_details.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         rv_details.setHasFixedSize(true)
 
         tv_view_info.setOnClickListener(View.OnClickListener {
 
-            intent = Intent(applicationContext,ViewInfoActivity::class.java)
-            intent.putExtra("Name",objFeaturedResturant.restaurant_name)
-            intent.putExtra("Status",objFeaturedResturant.status)
-            intent.putExtra("StartTime",objFeaturedResturant.delivery_start_time)
-            intent.putExtra("EndTime",objFeaturedResturant.delivery_end_time)
-            intent.putExtra("MinimumOrder",objFeaturedResturant.minimum_order_price)
-            intent.putExtra("DeliveryCharge",objFeaturedResturant.delivery_charge)
-            intent.putExtra("CardDelivery",objFeaturedResturant.accept_card)
-            intent.putExtra("CashDelivery",objFeaturedResturant.accept_cash_delivery)
-
+            intent = Intent(applicationContext, ViewInfoActivity::class.java)
+            intent.putExtra("Name", objFeaturedResturant.restaurant_name)
+            intent.putExtra("Status", objFeaturedResturant.status)
+            intent.putExtra("StartTime", objFeaturedResturant.delivery_start_time)
+            intent.putExtra("EndTime", objFeaturedResturant.delivery_end_time)
+            intent.putExtra("MinimumOrder", objFeaturedResturant.minimum_order_price)
+            intent.putExtra("DeliveryCharge", objFeaturedResturant.delivery_charge)
+            intent.putExtra("CardDelivery", objFeaturedResturant.accept_card)
+            intent.putExtra("CashDelivery", objFeaturedResturant.accept_cash_delivery)
+            intent.putExtra("Cuisines", objFeaturedResturant.restaurant_cuisines)
             startActivity(intent)
         })
 
-       setValue()
+        iv_back_details.setOnClickListener(View.OnClickListener {
+            onBackPressed()
+        })
+
+        setValue()
     }
 
     private fun setValue() {
@@ -75,9 +79,9 @@ class DetailsActivity : AppCompatActivity() {
 
         Glide.with(applicationContext)
                 .load(imageUrl)
-                .listener(object :RequestListener<Drawable>{
+                .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        iv_details_res_logo.setImageResource(R.drawable.ic_error_image)
+                        iv_details_res_logo.setImageResource(R.drawable.app_icon)
                         return true
                     }
 
@@ -95,11 +99,11 @@ class DetailsActivity : AppCompatActivity() {
 
         validateOrderNotice(minOrderDays, minOrderHours)
 
-        val featuredFoodCategoryAdapter = FeaturedFoodCategoryAdapter(applicationContext,objFeaturedResturant.food_category)
-        rv_type.adapter=featuredFoodCategoryAdapter
+        val featuredFoodCategoryAdapter = FeaturedFoodCategoryAdapter(applicationContext, objFeaturedResturant.food_category)
+        rv_type.adapter = featuredFoodCategoryAdapter
 
-        val openedFoodCategoryAdapter= OpenedFoodCategoryAdapter(applicationContext,objFeaturedResturant.food_category)
-        rv_details.adapter=openedFoodCategoryAdapter
+        val openedFoodCategoryAdapter = OpenedFoodCategoryAdapter(applicationContext, objFeaturedResturant.food_category)
+        rv_details.adapter = openedFoodCategoryAdapter
     }
 
     private fun validateOrderNotice(minOrderDays: Int, minOrderHours: Int) {

@@ -45,9 +45,16 @@ class DetailsOpenActivity : AppCompatActivity() {
             intent.putExtra("DeliveryCharge",objOpenRestaurant.delivery_charge)
             intent.putExtra("CardDelivery",objOpenRestaurant.accept_card)
             intent.putExtra("CashDelivery",objOpenRestaurant.accept_cash_delivery)
+            intent.putExtra("Cuisines", objOpenRestaurant.restaurant_cuisines)
 
             startActivity(intent)
         })
+
+        iv_back_open_details.setOnClickListener(View.OnClickListener {
+
+            onBackPressed()
+        })
+
         setValueforOpen()
     }
 
@@ -76,7 +83,7 @@ class DetailsOpenActivity : AppCompatActivity() {
                 .load(imageUrl2)
                 .listener(object: RequestListener<Drawable>{
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        iv_details_res_logo_open.setImageResource(R.drawable.ic_error_image)
+                        iv_details_res_logo_open.setImageResource(R.drawable.app_icon)
                         return true
                     }
 

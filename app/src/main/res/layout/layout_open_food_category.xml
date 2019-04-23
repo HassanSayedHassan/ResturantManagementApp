@@ -10,14 +10,8 @@
         android:background="#F1F1F1"
         android:text="SALADS"
         android:textAllCaps="true"
+        android:padding="5dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="10dp"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_food_name_details"
-        android:background="@color/colorWhite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
