@@ -1,4 +1,4 @@
-# Thaog-A-CateringPlatform
+# ResturantManagementApp
 A clone of Saudi Arabian popular Resturant Management App Thoag
 
 ## Technology Used
@@ -6,7 +6,7 @@ A clone of Saudi Arabian popular Resturant Management App Thoag
 - Kotlin
 - XML
 - Retrofit2
-- PHP Backend API
+- RESTful API
 
 ## Author
 - Soumik Bhattacharjee
